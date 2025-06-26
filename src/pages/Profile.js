@@ -308,18 +308,7 @@ export default function Profile() {
             Profile Info
           </Button>
 
-          <Button
-            fullWidth
-            startIcon={<EmailIcon />}
-            sx={{ 
-              justifyContent: 'flex-start',
-              mb: 1,
-              fontWeight: activeSection === 'email' ? 600 : 400
-            }}
-            onClick={() => setActiveSection('email')}
-          >
-            Email
-          </Button>
+          
 
           <Button
             fullWidth
