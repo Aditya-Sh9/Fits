@@ -11,6 +11,25 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import theme from './theme';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function PageTitleUpdater() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const pageTitles = {
+      '/': 'Home | Your Fitness Journey',
+      '/measurements': 'Measurements | Your Fitness Journey',
+      '/workouts': 'Workouts | Your Fitness Journey',
+      '/profile': 'Profile | Your Fitness Journey'
+    };
+    
+    document.title = pageTitles[location.pathname] || 'Your Fitness Journey';
+  }, [location.pathname]);
+
+  return null;
+}
 
 function App() {
   return (
