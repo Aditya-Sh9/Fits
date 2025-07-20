@@ -80,7 +80,8 @@ export default function Profile() {
       formData.append('file', file);
       formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
       formData.append('folder', 'profile_pictures');
-      formData.append('public_id', currentUser.uid);
+      const uniqueId = `${currentUser.uid}_${Date.now()}`;
+      formData.append('public_id', uniqueId);
       formData.append('tags', 'profile,avatar');
 
       const xhr = new XMLHttpRequest();
@@ -111,9 +112,11 @@ export default function Profile() {
 
       // Update Firebase profile with the new photoURL
       await updateProfile(auth.currentUser, { photoURL });
+      console.log("Updated Firebase user profile photo:", auth.currentUser.photoURL);
+
       
       setSuccess('Profile picture updated successfully!');
-      setTimeout(() => window.location.reload(), 1000); // Small delay to show success message
+      // setTimeout(() => window.location.reload(), 1000); // Small delay to show success message
     } catch (err) {
       setError(err.message || 'Failed to upload image');
       console.error('Profile picture update error:', err);
